@@ -1,0 +1,73 @@
+// Font Imports
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@900&display=swap");
+
+// Extends
+%Alegreya-bold {
+  font-family: "Alegreya Sans", sans-serif;
+  font-weight: 900;
+  letter-spacing: 3px;
+  word-spacing: 7px;
+}
+%Nunito-normal {
+  font-family: "Nunito", sans-serif;
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Variables
+$black: #000000;
+$grey: #f2f2f2;
+$white: #ffffff;
+
+#container {
+  @extend %Nunito-normal;
+  border: 1px solid $black;
+  border-radius: 14px;
+}
+
+#title {
+  @extend %Alegreya-bold;
+  text-align: center;
+  padding: 35px;
+}
+#converter {
+  background-color: $grey;
+  border-top: 1px solid $black;
+  border-bottom: 1px solid $black;
+  text-align: center;
+  #content-converse {
+    padding: 30px;
+    label {
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+    select {
+      padding-left: 7px;
+    }
+    #result {
+      background-color: $white;
+    }
+  }
+  #content-divider {
+    text-align: center;
+    font-size: 45px;
+  }
+}
+#background {
+  text-align: center;
+  #color {
+    width: 70%;
+  }
+  #color2 {
+    width: 25%;
+    height: 36px;
+    margin-bottom: 20px;
+  }
+  h4 {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 21px;
+    font-weight: bold;
+  }
+}

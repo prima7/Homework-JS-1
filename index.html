@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <div class="container pb-5 mt-3 mb-3" id="container">
+      <div class="row justify-content-center" id="title">
+        <h1>Temperature Conversion</h1>
+      </div>
+      <div class="row justify-content-center mb-5" id="converter">
+        <div class="col-sm-5" id="content-converse">
+          <label for="input-group-from">From:</label>
+          <div class="input-group input-group-lg" id="input-group-from">
+            <div class="input-group-prepend">
+              <select name="list_from" id="list_from" onchange="ClearText()">
+                <option value="cel">Celsius</option>
+                <option value="fah">Fahrenheit</option>
+                <option value="rea">Reamur</option>
+                <option value="kel">Kelvin</option>
+              </select>
+            </div>
+            <input
+              type="number"
+              class="form-control"
+              id="from"
+              onkeyup="conv()"
+            />
+          </div>
+        </div>
+        <div
+          class="col-sm-2 d-flex align-items-center justify-content-center"
+          id="content-divider"
+        >
+          =
+        </div>
+        <div class="col-sm-5" id="content-converse">
+          <label for="input-group-result">Result:</label>
+          <div class="input-group input-group-lg" id="input-group-result">
+            <div class="input-group-prepend">
+              <select
+                name="list_result"
+                id="list_result"
+                onchange="ClearText()"
+              >
+                <option value="cel">Celsius</option>
+                <option value="fah">Fahrenheit</option>
+                <option value="rea">Reamur</option>
+                <option value="kel">Kelvin</option>
+              </select>
+            </div>
+            <input type="number" class="form-control" id="result" disabled />
+          </div>
+        </div>
+      </div>
+      <div class="justify-content-center" id="background">
+        <h4>Change Background Color :</h4>
+        <div class="row justify-content-center" id="change-background">
+          <div class="col-sm-5">
+            <label for="color2">Type The Color Name/Code :</label>
+            <div class="row justify-content-center">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Your Color Name/Code.."
+                id="color"
+              />
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <h4>OR</h4>
+          </div>
+          <div class="col-sm-5">
+            <label for="color2">Use Color Picker Instead :</label>
+            <div class="row justify-content-center">
+              <input type="color" id="color2" value="#FFFFFF" />
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" onclick="ChangeColor()">
+          Change
+        </button>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Conversion Variables
+    FromListItem = document.getElementById("list_from");
+    ValueFrom = document.getElementById("from");
+    ResultListItem = document.getElementById("list_result");
+    ValueResult = document.getElementById("result");
+
+    // Background Color Variables
+    let color_1 = document.getElementById("color");
+    let color_2 = document.getElementById("color2");
+    class Convert {
+      fromCelcius(ResultListItem, ValueFrom) {
+        if (ResultListItem == "cel") {
+          return ValueFrom;
+        }
+        if (ResultListItem == "fah") {
+          return ValueFrom * (9 / 5) + 32;
+        }
+        if (ResultListItem == "rea") {
+          return ValueFrom * (4 / 5);
+        }
+        if (ResultListItem == "kel") {
+          return ValueFrom + 273.15;
+        }
+      }
+      fromReamur(ResultListItem, ValueFrom) {
+        if (ResultListItem == "rea") {
+          return ValueFrom;
+        }
+        if (ResultListItem == "cel") {
+          return ValueFrom * (5 / 4);
+        }
+        if (ResultListItem == "fah") {
+          return ValueFrom * (9 / 4) + 32;
+        }
+        if (ResultListItem == "kel") {
+          return (ValueFrom + 273.15) / 0.8;
+        }
+      }
+      fromFahrenheit(ResultListItem, ValueFrom) {
+        if (ResultListItem == "fah") {
+          return ValueFrom;
+        }
+        if (ResultListItem == "cel") {
+          return (ValueFrom - 32) * (5 / 9);
+        }
+        if (ResultListItem == "rea") {
+          return (ValueFrom - 32) * (4 / 9);
+        }
+        if (ResultListItem == "kel") {
+          return (ValueFrom - 32) * (5 / 9) + 273.15;
+        }
+      }
+      fromKelvin(ResultListItem, ValueFrom) {
+        if (ResultListItem == "kel") {
+          return ValueFrom;
+        }
+        if (ResultListItem == "cel") {
+          return ValueFrom - 273.15;
+        }
+        if (ResultListItem == "fah") {
+          return (ValueFrom - 273.15) * (9 / 5) + 32;
+        }
+        if (ResultListItem == "rea") {
+          return (ValueFrom - 273.15) * 0.8;
+        }
+      }
+    }
+    const converting = new Convert();
+    function conv() {
+      if (FromListItem.value == "cel") {
+        const count = converting.fromCelcius(
+          ResultListItem.value,
+          parseInt(ValueFrom.value)
+        );
+        ValueResult.value = count;
+      }
+      if (FromListItem.value == "rea") {
+        const count = converting.fromReamur(
+          ResultListItem.value,
+          parseInt(ValueFrom.value)
+        );
+        ValueResult.value = count;
+      }
+      if (FromListItem.value == "fah") {
+        const count = converting.fromFahrenheit(
+          ResultListItem.value,
+          parseInt(ValueFrom.value)
+        );
+        ValueResult.value = count;
+      }
+      if (FromListItem.value == "kel") {
+        const count = converting.fromKelvin(
+          ResultListItem.value,
+          parseInt(ValueFrom.value)
+        );
+        ValueResult.value = count;
+      }
+    }
+    function ClearText() {
+      ValueFrom.value = "";
+      ValueResult.value = "";
+    }
+    function ChangeColor() {
+      document.body.style.backgroundColor = color_1.value || color_2.value;
+      //color reset
+      color_1.value = "";
+      color_2.value = "#FFFFFF";
+    }
+  </script>
+  <!-- Bootstrap CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>
