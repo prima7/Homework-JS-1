@@ -92,16 +92,17 @@
   </body>
   <script src="./CountModules.js"></script>
   <script>
-    // Conversion Variables
+    //  Conversion Variables
     FromListItem = document.getElementById("list_from");
     ValueFrom = document.getElementById("from");
     ResultListItem = document.getElementById("list_result");
     ValueResult = document.getElementById("result");
 
-    // Background Color Variables
+    //  Background Color Variables
     let color_1 = document.getElementById("color");
     let color_2 = document.getElementById("color2");
-
+    
+    //  Conversion
     const converting = new Convert();
     function conv() {
       if (FromListItem.value == "cel") {
@@ -133,15 +134,17 @@
         ValueResult.value = count;
       }
     }
-
+    
+    //  Clear Input Text
     function ClearText() {
       ValueFrom.value = "";
       ValueResult.value = "";
     }
-
+    
+    //  Change Background Color
     function ChangeColor() {
       document.body.style.backgroundColor = color_1.value || color_2.value;
-      //color reset
+      //  color reset
       color_1.value = "";
       color_2.value = "#FFFFFF";
     }
